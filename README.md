@@ -110,9 +110,8 @@ First 10 features:
 plot(gps_with_routes['path'], pch = 16, pal  = rainbow(9), key.pos = 1)
 
 ```
-<p align="center">
-![](./man/figures/segments.png){width=250px}
-</p>
+
+<img src="man/figures/segments.png" width=250 height = 250 align="center" />
 
 ## Identify Simular Paths from Route Vector
 
@@ -132,9 +131,7 @@ Here we see that four of the 8 paths (1,5,3,7) are replicate paths. Paths 1 and 
 gps_with_routes %>% filter(path %in% c(3,7)) %>% select(path) %>% plot(pch=16, pal = c("red", "blue"), key.pos = NULL)
 ```
 
-<p align="center">
-![](./man/figures/isolate.png){width=250px}
-</p>
+<img src="man/figures/isolate.png" width=250 height = 250 align="center" />
 
 ## Calcuating path length, areas of overlap, and time of trips
 
@@ -149,9 +146,7 @@ We can plot the polygons,
 leaflet() %>% addTiles() %>% addPolygons(data = st_transform(out, AOI::aoiProj))
 ```
 
-<p align="center">
-![](./man/figures/map.png){width=250px}
-</p>
+<img src="man/figures/map.png" width=250 height = 250 align="center" />
 
 
 Or, extract the attribute data calculated within the function.
