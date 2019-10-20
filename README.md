@@ -111,7 +111,7 @@ plot(gps_with_routes['path'], pch = 16, pal  = rainbow(9), key.pos = 1)
 
 ```
 
-<img src="man/figures/segments.png" width=250 height = 250 align="center" />
+<img src="man/figures/segments.png" width=220 height = 250 align="center" />
 
 ## Identify Simular Paths from Route Vector
 
