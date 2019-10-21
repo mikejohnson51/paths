@@ -30,26 +30,17 @@ compare_paths = function(gps, same_paths, truth){
     l1$geometry[which.min(st_distance(trueEnd, l1))] = trueEnd$geometry
     l2$geometry[which.min(st_distance(trueEnd, l2))] = trueEnd$geometry
 
-    int = rbind(trueStart, trueEnd) %>%
-      st_coordinates() %>%
-      st_linestring() %>%
-      st_sfc() %>%
-      st_sf() %>%
-      st_set_crs(st_crs(gps))
+    make_lines = function(coords, gps){
+      st_linestring(coords) %>%
+        st_sfc() %>% st_sf() %>%
+        st_set_crs(st_crs(gps))
+    }
 
-    line1 = l1 %>%
-      st_coordinates()  %>%
-      st_linestring() %>%
-      st_sfc() %>%
-      st_sf() %>%
-      st_set_crs(st_crs(gps))
+    int = st_coordinates(rbind(trueStart, trueEnd)) %>% make_lines(gps)
 
-    line2 = l2 %>%
-      st_coordinates()  %>%
-      st_linestring() %>%
-      st_sfc() %>%
-      st_sf() %>%
-      st_set_crs(st_crs(gps))
+    line1 = make_lines(st_coordinates(l1), gps)
+
+    line2 = make_lines(st_coordinates(l2), gps)
 
     split = function(line, int){
       int1 = st_difference(line, st_buffer(st_intersection(line,int), dist=.01)) %>% st_cast("LINESTRING")
