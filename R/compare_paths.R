@@ -77,6 +77,14 @@ compare_paths = function(gps, same_paths, truth){
 
     u = st_difference(u, st_buffer(int, .01))
 
+    if(st_geometry_type(u) == "GEOMETRYCOLLECTION") {
+      u = u %>%
+      st_collection_extract("POLYGON") %>%
+      st_union() %>%
+      st_sf() %>%
+      st_zm()
+    }
+
     u$start = tmp$start
     u$end = tmp$end
     u$area = sum(units::set_units(st_area(u), "m^2"))
